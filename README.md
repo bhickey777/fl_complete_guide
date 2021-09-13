@@ -1,6 +1,6 @@
 # fl_complete_guide
 
-A new Flutter project.
+Flutter Project - Complete Guide.
 
 ## Getting Started
 
