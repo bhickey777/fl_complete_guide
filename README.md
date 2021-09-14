@@ -4,7 +4,7 @@ Flutter Project - Complete Guide.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This project is the first project in learning the basics of flutter. 
 
 A few resources to get you started if this is your first Flutter project:
 
