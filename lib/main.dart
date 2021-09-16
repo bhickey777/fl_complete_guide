@@ -7,9 +7,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var materialApp = MaterialApp(
-      home: const Text('Hello Doug!'),
-    );
-    return Center(child: materialApp);
+    return MaterialApp(
+        home: Scaffold(
+      appBar: AppBar(title: Text('My First App')),
+      body: Text('This is my default body!'),
+    ));
   }
 }
