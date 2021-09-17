@@ -20,4 +20,4 @@ samples, guidance on mobile development, and a full API reference.
 //git push to commit all changes to master branch (only using default branch)
 
 //CTRL space to get list of named arguments for a method
-//SHIFT+ALT+F to format document
+//SHIFT+OPTION+F to format document
