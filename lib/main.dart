@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 //local imports
 import './question.dart';
+import './answer.dart';
 
 void main() => runApp(MyApp());
 
@@ -18,66 +19,41 @@ class _MyAppState extends State<MyApp> {
   final double kButtonSize = 180;
 
   var _questionIndex = 0;
-  var _colorsIndex = 0;
 
-  var questions = ['What\'s your favorite color?', 'Your next favorite color?'];
-
-  var _colors = [Colors.blue, Colors.red, Colors.orange];
-
-  void _answerBlue() {
-    setState(() {
-      _colorsIndex = 0;
-    });
-    printChoice('blue');
-  }
-
-  void _answerRed() {
-    setState(() {
-      _colorsIndex = 1;
-    });
-    printChoice('red');
-  }
-
-  void _answerOrange() {
-    setState(() {
-      _colorsIndex = 2;
-    });
-    printChoice('orange');
-  }
-
-  void printChoice(String choice) {
-    print('size of questions: ${questions.length}');
-    if (_questionIndex + 1 >= questions.length) {
-      print('I choose ' + choice + 'index: ${_questionIndex}');
-      return;
+  var questions = [
+    {
+      'questionText': 'What\'s your favorite color?',
+      'answers': ['Black', 'Red', 'Orange']
+    },
+    {
+      'questionText': 'What\'s your favorite animal?',
+      'answers': ['Eagle', 'Fish', 'Bear', 'Lion']
+    },
+    {
+      'questionText': 'What\'s your favorite movie?',
+      'answers': [
+        'Final Destination',
+        'Resident Evil',
+        'Outlander',
+        'HomeComing'
+      ]
     }
+  ];
 
+  void _answerQuestion() {
+    if (_questionIndex + 1 >= questions.length) return;
+    printQuestion(questions[_questionIndex]['questionText'] as String);
     setState(() {
       _questionIndex++;
     });
   }
 
+  void printQuestion(String question) {
+    print('I am on question: ' + question);
+  }
+
   @override
   Widget build(BuildContext context) {
-    var questionsAndActions = [
-      Question(questions[_questionIndex]),
-      Container(
-        width: kButtonSize,
-        margin: EdgeInsets.all(10),
-        child: RaisedButton(child: Text('Blue'), onPressed: _answerBlue),
-      ),
-      Container(
-        width: kButtonSize,
-        margin: EdgeInsets.all(10),
-        child: RaisedButton(child: Text('Red'), onPressed: _answerRed),
-      ),
-      Container(
-        width: kButtonSize,
-        margin: EdgeInsets.all(10),
-        child: RaisedButton(child: Text('Orange'), onPressed: _answerOrange),
-      )
-    ];
-
     return MaterialApp(
         home: Scaffold(
       appBar: AppBar(
@@ -91,8 +67,15 @@ class _MyAppState extends State<MyApp> {
           ),
         ),
       ),
-      body: Column(children: questionsAndActions),
-      backgroundColor: _colors[_colorsIndex],
+      body: Column(children: [
+        Question(
+          questions[_questionIndex]['questionText'] as String,
+        ),
+        ...(questions[_questionIndex]['answers'] as List<String>).map((answer) {
+          return Answer(answer, _answerQuestion) as Widget;
+        }).toList()
+      ]),
+      backgroundColor: Colors.black54,
     ));
   }
 }
