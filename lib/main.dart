@@ -67,6 +67,7 @@ class _MyAppState extends State<MyApp> {
           ),
         ),
       ),
+      // the use of ... is a convention to spread out a list into its individual components
       body: Column(children: [
         Question(
           questions[_questionIndex]['questionText'] as String,
