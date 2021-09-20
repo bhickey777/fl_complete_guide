@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import './question.dart';
 import './answer.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatefulWidget {
-  //const MyApp({Key? key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -20,7 +20,7 @@ class _MyAppState extends State<MyApp> {
 
   var _questionIndex = 0;
 
-  var questions = [
+  var questions = const [
     {
       'questionText': 'What\'s your favorite color?',
       'answers': ['Black', 'Red', 'Orange']
@@ -60,7 +60,7 @@ class _MyAppState extends State<MyApp> {
         backgroundColor: Colors.black,
         title: Container(
           width: double.infinity,
-          child: Text(
+          child: const Text(
             'Color Questions',
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 30, color: Colors.white),
@@ -73,7 +73,7 @@ class _MyAppState extends State<MyApp> {
           questions[_questionIndex]['questionText'] as String,
         ),
         ...(questions[_questionIndex]['answers'] as List<String>).map((answer) {
-          return Answer(answer, _answerQuestion) as Widget;
+          return Answer(answer, _answerQuestion);
         }).toList()
       ]),
       backgroundColor: Colors.black54,
