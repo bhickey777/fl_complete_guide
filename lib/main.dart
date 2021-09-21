@@ -16,11 +16,9 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final double kButtonSize = 180;
-
   var _questionIndex = 0;
 
-  var questions = const [
+  final questions = const [
     {
       'questionText': 'What\'s your favorite color?',
       'answers': ['Black', 'Red', 'Orange']
@@ -41,11 +39,11 @@ class _MyAppState extends State<MyApp> {
   ];
 
   void _answerQuestion() {
-    if (_questionIndex + 1 >= questions.length) return;
-    printQuestion(questions[_questionIndex]['questionText'] as String);
-    setState(() {
-      _questionIndex++;
-    });
+    if (_questionIndex < questions.length) {
+      setState() {
+        _questionIndex++;
+      }
+    }
   }
 
   void printQuestion(String question) {
@@ -67,15 +65,18 @@ class _MyAppState extends State<MyApp> {
           ),
         ),
       ),
-      // the use of ... is a convention to spread out a list into its individual components
-      body: Column(children: [
-        Question(
-          questions[_questionIndex]['questionText'] as String,
-        ),
-        ...(questions[_questionIndex]['answers'] as List<String>).map((answer) {
-          return Answer(answer, _answerQuestion);
-        }).toList()
-      ]),
+      body: (_questionIndex < questions.length)
+          ? Column(children: [
+              Question(
+                questions[_questionIndex]['questionText'] as String,
+              ),
+              // the use of ... is a convention to spread out a list into its individual components
+              ...(questions[_questionIndex]['answers'] as List<String>)
+                  .map((answer) {
+                return Answer(answer, _answerQuestion);
+              }).toList()
+            ])
+          : const Center(child: Text('You have completed all the questions')),
       backgroundColor: Colors.black54,
     ));
   }
