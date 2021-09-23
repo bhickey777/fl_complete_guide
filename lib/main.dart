@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 //local imports
-import './global.dart';
 import './quiz.dart';
 import './result.dart';
 
@@ -50,6 +49,13 @@ class _MyAppState extends State<MyApp> {
     }
   ];
 
+  void _resetQuiz() {
+    setState(() {
+      _totalScore = 0;
+      _questionIndex = 0;
+    });
+  }
+
   void _answerQuestion(int score) {
     _totalScore += score;
 
@@ -84,7 +90,10 @@ class _MyAppState extends State<MyApp> {
               questions: _questions,
               answerQuestion: _answerQuestion,
               questionIndex: _questionIndex)
-          : Result(message: 'You have completed all the questions!'),
+          : Result(
+              reset: _resetQuiz,
+              score: _totalScore,
+              message: 'You have completed all the questions'),
       backgroundColor: Colors.black54,
     ));
   }
