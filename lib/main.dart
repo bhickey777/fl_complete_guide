@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 //local imports
+import './global.dart';
 import './quiz.dart';
 import './result.dart';
 

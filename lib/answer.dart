@@ -1,9 +1,10 @@
 //answer.dart
 import 'package:flutter/material.dart';
+import './global.dart';
 
 class Answer extends StatelessWidget {
   final String answerText;
-  final void Function(int) answerCallback;
+  final AnswerQuestion answerCallback;
   final int answerScore;
 
   const Answer(this.answerText, this.answerScore, this.answerCallback);

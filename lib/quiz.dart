@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+
+import './global.dart';
 import './question.dart';
 import './answer.dart';
 
 class Quiz extends StatelessWidget {
-  void Function(int) answerQuestion;
+  AnswerQuestion answerQuestion;
   int questionIndex;
   List<Map<String, Object>> questions;
 
