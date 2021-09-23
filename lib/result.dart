@@ -8,8 +8,8 @@ class Result extends StatelessWidget {
   Result({required this.reset, required this.score, required this.message});
 
   String getResultMessage() {
-    if (score <= 8) {
-      return "You are awesome and innocent";
+    if (score <= 33) {
+      return "You are awesome and innocent!";
     } else {
       return message + ' with a score of ' + '$score';
     }
@@ -25,10 +25,12 @@ class Result extends StatelessWidget {
           style: TextStyle(
               fontSize: 26, fontWeight: FontWeight.bold, color: Colors.white),
         ),
-        ElevatedButton(
+        OutlinedButton(
           onPressed: resetQuestions,
           child: Text('Restart Quiz!'),
-          style: ElevatedButton.styleFrom(shape: StadiumBorder()),
+          style: OutlinedButton.styleFrom(
+              primary: Colors.greenAccent,
+              side: BorderSide(color: Colors.white)),
         )
       ]),
     );
