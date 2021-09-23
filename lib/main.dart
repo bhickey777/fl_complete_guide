@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 //local imports
-import './question.dart';
-import './answer.dart';
+import './quiz.dart';
+import './result.dart';
 
 void main() => runApp(const MyApp());
 
@@ -17,33 +17,46 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   var _questionIndex = 0;
+  var _totalScore = 0;
 
-  final questions = const [
+  final _questions = const [
     {
       'questionText': 'What\'s your favorite color?',
-      'answers': ['Black', 'Red', 'Orange']
+      'answers': [
+        {'text': 'Black', 'score': 10},
+        {'text': 'Red', 'score': 6},
+        {'text': 'Green', 'score': 3},
+        {'text': 'White', 'score': 1},
+      ]
     },
     {
       'questionText': 'What\'s your favorite animal?',
-      'answers': ['Eagle', 'Fish', 'Bear', 'Lion']
+      'answers': [
+        {'text': 'Eagle', 'score': 1},
+        {'text': 'Fish', 'score': 7},
+        {'text': 'Bear', 'score': 13},
+        {'text': 'Lion', 'score': 44}
+      ]
     },
     {
       'questionText': 'What\'s your favorite movie?',
       'answers': [
-        'Final Destination',
-        'Resident Evil',
-        'Outlander',
-        'HomeComing'
+        {'text': 'Final Destination', 'score': 10},
+        {'text': 'Resident Evil', 'score': 20},
+        {'text': 'Outlander', 'score': 30},
+        {'text': 'Scrooge', 'score': 7},
       ]
     }
   ];
 
-  void _answerQuestion() {
-    if (_questionIndex < questions.length) {
-      setState() {
-        _questionIndex++;
-      }
-    }
+  void _answerQuestion(int score) {
+    _totalScore += score;
+
+    setState(() {
+      _questionIndex++;
+    });
+
+    print("my total score: {_totalScore}");
   }
 
   void printQuestion(String question) {
@@ -65,18 +78,12 @@ class _MyAppState extends State<MyApp> {
           ),
         ),
       ),
-      body: (_questionIndex < questions.length)
-          ? Column(children: [
-              Question(
-                questions[_questionIndex]['questionText'] as String,
-              ),
-              // the use of ... is a convention to spread out a list into its individual components
-              ...(questions[_questionIndex]['answers'] as List<String>)
-                  .map((answer) {
-                return Answer(answer, _answerQuestion);
-              }).toList()
-            ])
-          : const Center(child: Text('You have completed all the questions')),
+      body: (_questionIndex < _questions.length)
+          ? Quiz(
+              questions: _questions,
+              answerQuestion: _answerQuestion,
+              questionIndex: _questionIndex)
+          : Result(message: 'You have completed all the questions!'),
       backgroundColor: Colors.black54,
     ));
   }
