@@ -63,7 +63,7 @@ class _MyAppState extends State<MyApp> {
       _questionIndex++;
     });
 
-    print("my total score: {_totalScore}");
+    print("my total score: $_totalScore");
   }
 
   void printQuestion(String question) {
